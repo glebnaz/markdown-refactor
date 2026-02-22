@@ -58,12 +58,12 @@
 - [x] run tests - must pass before next task
 
 ### Task 3: Implement file reading and multi-file support
-- [ ] create `internal/files/reader.go` with functions to resolve input paths
-- [ ] support: single file, multiple files, directory (recursively find `*.md` files)
-- [ ] validate files exist and are readable
-- [ ] write tests for single file, multiple files, directory resolution
-- [ ] write tests for error cases (file not found, not a markdown file, empty directory)
-- [ ] run tests - must pass before next task
+- [x] create `internal/files/reader.go` with functions to resolve input paths
+- [x] support: single file, multiple files, directory (recursively find `*.md` files)
+- [x] validate files exist and are readable
+- [x] write tests for single file, multiple files, directory resolution
+- [x] write tests for error cases (file not found, not a markdown file, empty directory)
+- [x] run tests - must pass before next task
 
 ### Task 4: Implement diff generation and display
 - [ ] create `internal/diff/diff.go` with function to compute line-by-line diff between original and corrected text

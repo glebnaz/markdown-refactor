@@ -85,12 +85,12 @@
 - [x] run tests - must pass before next task
 
 ### Task 6: Wire everything together in main
-- [ ] connect all components in `cmd/mdrefactor/main.go`: parse args -> resolve files -> for each file: read -> call LLM -> compute diff -> show diff -> prompt -> apply
-- [ ] add progress indicator: "Processing file 2/5: notes.md"
-- [ ] add summary at the end: "3 files fixed, 1 skipped, 1 unchanged"
-- [ ] handle graceful shutdown (Ctrl+C)
-- [ ] write integration test with mock LLM server testing full flow
-- [ ] run tests - must pass before next task
+- [x] connect all components in `cmd/mdrefactor/main.go`: parse args -> resolve files -> for each file: read -> call LLM -> compute diff -> show diff -> prompt -> apply
+- [x] add progress indicator: "Processing file 2/5: notes.md"
+- [x] add summary at the end: "3 files fixed, 1 skipped, 1 unchanged"
+- [x] handle graceful shutdown (Ctrl+C)
+- [x] write integration test with mock LLM server testing full flow
+- [x] run tests - must pass before next task
 
 ### Task 7: Verify acceptance criteria
 - [ ] verify: single file processing works

@@ -66,13 +66,13 @@
 - [x] run tests - must pass before next task
 
 ### Task 4: Implement diff generation and display
-- [ ] create `internal/diff/diff.go` with function to compute line-by-line diff between original and corrected text
-- [ ] use a Go diff library (e.g., `github.com/sergi/go-diff`) for unified diff
-- [ ] create `internal/tui/diffview.go` - Bubble Tea model for scrollable colored diff display
-- [ ] use lipgloss for styling: green for additions, red for removals, gray for context
-- [ ] show file name header above each diff
-- [ ] write tests for diff computation (no changes, additions, removals, mixed)
-- [ ] run tests - must pass before next task
+- [x] create `internal/diff/diff.go` with function to compute line-by-line diff between original and corrected text
+- [x] use a Go diff library (e.g., `github.com/sergi/go-diff`) for unified diff
+- [x] create `internal/tui/diffview.go` - Bubble Tea model for scrollable colored diff display
+- [x] use lipgloss for styling: green for additions, red for removals, gray for context
+- [x] show file name header above each diff
+- [x] write tests for diff computation (no changes, additions, removals, mixed)
+- [x] run tests - must pass before next task
 
 ### Task 5: Implement approval flow and file writing
 - [ ] create `internal/tui/approve.go` - Bubble Tea model for approve/skip/quit prompt after diff view

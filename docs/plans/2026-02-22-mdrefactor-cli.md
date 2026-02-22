@@ -47,15 +47,15 @@
 - [x] run tests - must pass before next task
 
 ### Task 2: Implement LMStudio client
-- [ ] create `internal/llm/client.go` with `Client` interface and `LMStudioClient` struct
-- [ ] implement `Fix(ctx context.Context, content string) (string, error)` method
-- [ ] use OpenAI-compatible chat completions API (`POST /v1/chat/completions`)
-- [ ] craft system prompt: "Fix grammar, spelling, and syntax errors in the following Markdown. Do not change the meaning. Return only the corrected Markdown, no explanations."
-- [ ] default endpoint: `http://localhost:1234`
-- [ ] configurable via `--endpoint` flag
-- [ ] write tests with HTTP test server mocking LMStudio responses
-- [ ] write tests for error cases (connection refused, bad response, empty response)
-- [ ] run tests - must pass before next task
+- [x] create `internal/llm/client.go` with `Client` interface and `LMStudioClient` struct
+- [x] implement `Fix(ctx context.Context, content string) (string, error)` method
+- [x] use OpenAI-compatible chat completions API (`POST /v1/chat/completions`)
+- [x] craft system prompt: "Fix grammar, spelling, and syntax errors in the following Markdown. Do not change the meaning. Return only the corrected Markdown, no explanations."
+- [x] default endpoint: `http://localhost:1234`
+- [x] configurable via `--endpoint` flag
+- [x] write tests with HTTP test server mocking LMStudio responses
+- [x] write tests for error cases (connection refused, bad response, empty response)
+- [x] run tests - must pass before next task
 
 ### Task 3: Implement file reading and multi-file support
 - [ ] create `internal/files/reader.go` with functions to resolve input paths

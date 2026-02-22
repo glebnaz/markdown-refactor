@@ -39,12 +39,12 @@
 ## Implementation Steps
 
 ### Task 1: Initialize Go project and set up project structure
-- [ ] run `go mod init github.com/glebnaz/markdown-refactor`
-- [ ] create directory structure: `cmd/mdrefactor/`, `internal/llm/`, `internal/diff/`, `internal/tui/`
-- [ ] create `cmd/mdrefactor/main.go` with basic CLI flag parsing (file/dir args, `--auto` flag, `--endpoint` flag for LMStudio URL)
-- [ ] use standard `flag` package for CLI args (keep it simple)
-- [ ] write tests for flag parsing and argument validation
-- [ ] run tests - must pass before next task
+- [x] run `go mod init github.com/glebnaz/markdown-refactor`
+- [x] create directory structure: `cmd/mdrefactor/`, `internal/llm/`, `internal/diff/`, `internal/tui/`
+- [x] create `cmd/mdrefactor/main.go` with basic CLI flag parsing (file/dir args, `--auto` flag, `--endpoint` flag for LMStudio URL)
+- [x] use standard `flag` package for CLI args (keep it simple)
+- [x] write tests for flag parsing and argument validation
+- [x] run tests - must pass before next task
 
 ### Task 2: Implement LMStudio client
 - [ ] create `internal/llm/client.go` with `Client` interface and `LMStudioClient` struct

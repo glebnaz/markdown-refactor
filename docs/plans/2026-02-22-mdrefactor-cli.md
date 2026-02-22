@@ -75,14 +75,14 @@
 - [x] run tests - must pass before next task
 
 ### Task 5: Implement approval flow and file writing
-- [ ] create `internal/tui/approve.go` - Bubble Tea model for approve/skip/quit prompt after diff view
-- [ ] options: [Y]es apply, [N]o skip, [Q]uit
-- [ ] when approved, write corrected content back to original file
-- [ ] when `--auto` flag is set, skip approval and apply all changes automatically
-- [ ] if no changes detected for a file, skip it with a message
-- [ ] write tests for file writing logic (apply, skip scenarios)
-- [ ] write tests for auto-approve flow
-- [ ] run tests - must pass before next task
+- [x] create `internal/tui/approve.go` - Bubble Tea model for approve/skip/quit prompt after diff view
+- [x] options: [Y]es apply, [N]o skip, [Q]uit
+- [x] when approved, write corrected content back to original file
+- [x] when `--auto` flag is set, skip approval and apply all changes automatically
+- [x] if no changes detected for a file, skip it with a message
+- [x] write tests for file writing logic (apply, skip scenarios)
+- [x] write tests for auto-approve flow
+- [x] run tests - must pass before next task
 
 ### Task 6: Wire everything together in main
 - [ ] connect all components in `cmd/mdrefactor/main.go`: parse args -> resolve files -> for each file: read -> call LLM -> compute diff -> show diff -> prompt -> apply

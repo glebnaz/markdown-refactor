@@ -61,17 +61,41 @@ func processFile(ctx context.Context, w io.Writer, client llm.Client, filePath s
 	}
 
 	shortName := filepath.Base(filePath)
-	_, _ = fmt.Fprintf(w, "Processing file %d/%d: %s\n", index, total, shortName)
 
 	content, err := files.ReadFile(filePath)
 	if err != nil {
 		return "", fmt.Errorf("reading %s: %w", shortName, err)
 	}
 
-	corrected, err := client.Fix(ctx, content)
+	// Protect frontmatter from LLM modifications.
+	frontmatter, body := files.SplitFrontmatter(content)
+
+	var correctedBody string
+
+	if cfg.auto {
+		// Non-interactive: plain text progress, no TTY needed.
+		_, _ = fmt.Fprintf(w, "Processing file %d/%d: %s\n", index, total, shortName)
+		correctedBody, err = client.Fix(ctx, body)
+	} else {
+		// Interactive: show spinner while LLM processes.
+		spinnerMsg := fmt.Sprintf("Processing file %d/%d: %s", index, total, shortName)
+		spinnerModel := tui.NewSpinnerModel(spinnerMsg, func() (string, error) {
+			return client.Fix(ctx, body)
+		})
+		sp := tea.NewProgram(spinnerModel)
+		var finalSpinner tea.Model
+		finalSpinner, err = sp.Run()
+		if err == nil {
+			llmResult := finalSpinner.(tui.SpinnerModel).Result()
+			correctedBody, err = llmResult.Value, llmResult.Err
+		}
+	}
 	if err != nil {
 		return "", fmt.Errorf("fixing %s: %w", shortName, err)
 	}
+
+	// Reassemble frontmatter + corrected body.
+	corrected := frontmatter + correctedBody
 
 	diffResult := diff.Compute(shortName, content, corrected)
 

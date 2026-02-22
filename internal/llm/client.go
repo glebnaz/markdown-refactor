@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"regexp"
 	"strings"
 )
 
@@ -110,5 +111,14 @@ func (c *LMStudioClient) Fix(ctx context.Context, content string) (string, error
 		return "", fmt.Errorf("LMStudio returned empty content")
 	}
 
+	result = stripThinkBlocks(result)
+
 	return result, nil
+}
+
+var thinkBlockRe = regexp.MustCompile(`(?s)<think>.*?</think>\s*`)
+
+// stripThinkBlocks removes <think>...</think> blocks from LLM output.
+func stripThinkBlocks(s string) string {
+	return thinkBlockRe.ReplaceAllString(s, "")
 }

@@ -61,7 +61,7 @@ func processFile(ctx context.Context, w io.Writer, client llm.Client, filePath s
 	}
 
 	shortName := filepath.Base(filePath)
-	fmt.Fprintf(w, "Processing file %d/%d: %s\n", index, total, shortName)
+	_, _ = fmt.Fprintf(w, "Processing file %d/%d: %s\n", index, total, shortName)
 
 	content, err := files.ReadFile(filePath)
 	if err != nil {
@@ -76,16 +76,16 @@ func processFile(ctx context.Context, w io.Writer, client llm.Client, filePath s
 	diffResult := diff.Compute(shortName, content, corrected)
 
 	if !diffResult.HasDiff {
-		fmt.Fprintf(w, "  No changes needed for %s\n", shortName)
+		_, _ = fmt.Fprintf(w, "  No changes needed for %s\n", shortName)
 		return "unchanged", nil
 	}
 
 	if cfg.auto {
-		fmt.Fprint(w, tui.RenderDiffPlain(diffResult))
+		_, _ = fmt.Fprint(w, tui.RenderDiffPlain(diffResult))
 		if err := files.WriteFile(filePath, corrected); err != nil {
 			return "", fmt.Errorf("writing %s: %w", shortName, err)
 		}
-		fmt.Fprintf(w, "  Applied changes to %s\n", shortName)
+		_, _ = fmt.Fprintf(w, "  Applied changes to %s\n", shortName)
 		return "fixed", nil
 	}
 
@@ -109,10 +109,10 @@ func processFile(ctx context.Context, w io.Writer, client llm.Client, filePath s
 		if err := files.WriteFile(filePath, corrected); err != nil {
 			return "", fmt.Errorf("writing %s: %w", shortName, err)
 		}
-		fmt.Fprintf(w, "  Applied changes to %s\n", shortName)
+		_, _ = fmt.Fprintf(w, "  Applied changes to %s\n", shortName)
 		return "fixed", nil
 	case tui.DecisionSkip:
-		fmt.Fprintf(w, "  Skipped %s\n", shortName)
+		_, _ = fmt.Fprintf(w, "  Skipped %s\n", shortName)
 		return "skipped", nil
 	case tui.DecisionQuit:
 		return "quit", nil
@@ -143,13 +143,13 @@ func execute(ctx context.Context, w io.Writer, cfg config, client llm.Client) er
 		case "unchanged":
 			s.unchanged++
 		case "quit":
-			fmt.Fprintf(w, "\nQuitting...\n")
-			fmt.Fprintln(w, s)
+			_, _ = fmt.Fprintf(w, "\nQuitting...\n")
+			_, _ = fmt.Fprintln(w, s)
 			return nil
 		}
 	}
 
-	fmt.Fprintf(w, "\n%s\n", s)
+	_, _ = fmt.Fprintf(w, "\n%s\n", s)
 	return nil
 }
 

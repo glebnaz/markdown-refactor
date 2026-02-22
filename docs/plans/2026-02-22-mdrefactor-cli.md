@@ -93,14 +93,14 @@
 - [x] run tests - must pass before next task
 
 ### Task 7: Verify acceptance criteria
-- [ ] verify: single file processing works
-- [ ] verify: multiple files processing works
-- [ ] verify: directory recursive processing works
-- [ ] verify: `--auto` flag skips approval
-- [ ] verify: `--endpoint` flag configures LMStudio URL
-- [ ] verify: diff display is colored and scrollable
-- [ ] run full test suite
-- [ ] run linter (`golangci-lint run`) - all issues must be fixed
+- [x] verify: single file processing works
+- [x] verify: multiple files processing works
+- [x] verify: directory recursive processing works
+- [x] verify: `--auto` flag skips approval
+- [x] verify: `--endpoint` flag configures LMStudio URL
+- [x] verify: diff display is colored and scrollable
+- [x] run full test suite
+- [x] run linter (`golangci-lint run`) - all issues must be fixed
 
 ### Task 8: [Final] Update documentation
 - [ ] create README.md with: project description, installation, usage examples, flags reference

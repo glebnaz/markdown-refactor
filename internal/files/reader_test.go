@@ -55,11 +55,19 @@ func TestResolveDirectory(t *testing.T) {
 	dir := t.TempDir()
 
 	// Create markdown files at root and nested level
-	os.WriteFile(filepath.Join(dir, "root.md"), []byte("# Root"), 0644)
-	os.MkdirAll(filepath.Join(dir, "sub"), 0755)
-	os.WriteFile(filepath.Join(dir, "sub", "nested.md"), []byte("# Nested"), 0644)
+	if err := os.WriteFile(filepath.Join(dir, "root.md"), []byte("# Root"), 0644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.MkdirAll(filepath.Join(dir, "sub"), 0755); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(dir, "sub", "nested.md"), []byte("# Nested"), 0644); err != nil {
+		t.Fatal(err)
+	}
 	// Non-markdown file should be ignored
-	os.WriteFile(filepath.Join(dir, "readme.txt"), []byte("text"), 0644)
+	if err := os.WriteFile(filepath.Join(dir, "readme.txt"), []byte("text"), 0644); err != nil {
+		t.Fatal(err)
+	}
 
 	got, err := Resolve([]string{dir})
 	if err != nil {
@@ -76,9 +84,15 @@ func TestResolveDirectoryDeep(t *testing.T) {
 
 	// Create deeply nested markdown file
 	deep := filepath.Join(dir, "a", "b", "c")
-	os.MkdirAll(deep, 0755)
-	os.WriteFile(filepath.Join(deep, "deep.md"), []byte("# Deep"), 0644)
-	os.WriteFile(filepath.Join(dir, "top.md"), []byte("# Top"), 0644)
+	if err := os.MkdirAll(deep, 0755); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(deep, "deep.md"), []byte("# Deep"), 0644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(dir, "top.md"), []byte("# Top"), 0644); err != nil {
+		t.Fatal(err)
+	}
 
 	got, err := Resolve([]string{dir})
 	if err != nil {
@@ -95,13 +109,21 @@ func TestResolveMixedFilesAndDirs(t *testing.T) {
 
 	// A standalone file
 	standalone := filepath.Join(dir, "standalone.md")
-	os.WriteFile(standalone, []byte("# Standalone"), 0644)
+	if err := os.WriteFile(standalone, []byte("# Standalone"), 0644); err != nil {
+		t.Fatal(err)
+	}
 
 	// A directory with files
 	subdir := filepath.Join(dir, "docs")
-	os.MkdirAll(subdir, 0755)
-	os.WriteFile(filepath.Join(subdir, "doc1.md"), []byte("# Doc1"), 0644)
-	os.WriteFile(filepath.Join(subdir, "doc2.md"), []byte("# Doc2"), 0644)
+	if err := os.MkdirAll(subdir, 0755); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(subdir, "doc1.md"), []byte("# Doc1"), 0644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(subdir, "doc2.md"), []byte("# Doc2"), 0644); err != nil {
+		t.Fatal(err)
+	}
 
 	got, err := Resolve([]string{standalone, subdir})
 	if err != nil {
@@ -116,7 +138,9 @@ func TestResolveMixedFilesAndDirs(t *testing.T) {
 func TestResolveDeduplicate(t *testing.T) {
 	dir := t.TempDir()
 	mdFile := filepath.Join(dir, "test.md")
-	os.WriteFile(mdFile, []byte("# Hello"), 0644)
+	if err := os.WriteFile(mdFile, []byte("# Hello"), 0644); err != nil {
+		t.Fatal(err)
+	}
 
 	// Pass the same file twice
 	got, err := Resolve([]string{mdFile, mdFile})
@@ -132,7 +156,9 @@ func TestResolveDeduplicate(t *testing.T) {
 func TestResolveMarkdownExtension(t *testing.T) {
 	dir := t.TempDir()
 	mdFile := filepath.Join(dir, "notes.markdown")
-	os.WriteFile(mdFile, []byte("# Notes"), 0644)
+	if err := os.WriteFile(mdFile, []byte("# Notes"), 0644); err != nil {
+		t.Fatal(err)
+	}
 
 	got, err := Resolve([]string{mdFile})
 	if err != nil {
@@ -169,7 +195,9 @@ func TestResolveFileNotFound(t *testing.T) {
 func TestResolveNotMarkdownFile(t *testing.T) {
 	dir := t.TempDir()
 	txtFile := filepath.Join(dir, "notes.txt")
-	os.WriteFile(txtFile, []byte("plain text"), 0644)
+	if err := os.WriteFile(txtFile, []byte("plain text"), 0644); err != nil {
+		t.Fatal(err)
+	}
 
 	_, err := Resolve([]string{txtFile})
 	if err == nil {
@@ -194,8 +222,12 @@ func TestResolveEmptyDirectory(t *testing.T) {
 
 func TestResolveDirectoryWithNoMarkdown(t *testing.T) {
 	dir := t.TempDir()
-	os.WriteFile(filepath.Join(dir, "code.go"), []byte("package main"), 0644)
-	os.WriteFile(filepath.Join(dir, "data.json"), []byte("{}"), 0644)
+	if err := os.WriteFile(filepath.Join(dir, "code.go"), []byte("package main"), 0644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(dir, "data.json"), []byte("{}"), 0644); err != nil {
+		t.Fatal(err)
+	}
 
 	_, err := Resolve([]string{dir})
 	if err == nil {

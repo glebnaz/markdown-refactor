@@ -85,7 +85,7 @@ func (c *LMStudioClient) Fix(ctx context.Context, content string) (string, error
 	if err != nil {
 		return "", fmt.Errorf("sending request to LMStudio: %w", err)
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	respBody, err := io.ReadAll(resp.Body)
 	if err != nil {

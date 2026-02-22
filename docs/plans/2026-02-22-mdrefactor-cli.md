@@ -103,8 +103,8 @@
 - [x] run linter (`golangci-lint run`) - all issues must be fixed
 
 ### Task 8: [Final] Update documentation
-- [ ] create README.md with: project description, installation, usage examples, flags reference
-- [ ] add example usage with LMStudio setup instructions
+- [x] create README.md with: project description, installation, usage examples, flags reference
+- [x] add example usage with LMStudio setup instructions
 
 ## Technical Details
 

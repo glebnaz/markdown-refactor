@@ -11,7 +11,16 @@ import (
 	"strings"
 )
 
-const systemPrompt = "Fix grammar, spelling, and syntax errors in the following Markdown. Do not change the meaning. Return only the corrected Markdown, no explanations."
+const systemPrompt = `You are a proofreader. You receive a Markdown note and return it with only grammar, spelling, and punctuation errors fixed.
+
+Rules:
+- Fix typos, spelling mistakes, grammatical errors, and punctuation
+- Do NOT change the meaning, tone, or style of the text
+- Do NOT rephrase, rewrite, or restructure sentences
+- Do NOT add, remove, or reorder any content
+- Preserve ALL Markdown formatting exactly: headings, lists, links, code blocks, frontmatter (--- blocks), etc.
+- Preserve ALL metadata, YAML frontmatter, tags, dates, and properties exactly as they are
+- Return the full corrected document, nothing else — no explanations, no comments`
 
 // Client defines the interface for an LLM that can fix markdown text.
 type Client interface {
